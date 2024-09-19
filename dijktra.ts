@@ -38,7 +38,35 @@ class MinHeap{
       let rightChildIdx = 2 * idx+2;
       let swapIdx = null;
 
-      if(leftChildIdx < length &))
+      if(leftChildIdx < length && this.heap[leftChildIdx].dist < this.heap[idx].dist){
+        swpIdx = leftChildIdx;
+      }
+        if(rightChildIdx < length && this.heap[rightChildIdx].dist < (swapIdx ? this.heap[swapIdx].dist : this.heap[idx].dist)){
+          swapIdx = rightChildIdx;
+        }
+          if(swapIdx === null)break;
+            [this.heap[idx], this.heap[swapIdx]]=[this.heap[swapIdx], this.heap[idx]];
+            idx = swapIdx;
     }
   }
+
+  function djs(graph:number[][][], start:number): number[]{
+    const dist = Array(graph.length).fill(infinity);
+    const heap = new MInHeap();
+    dist[start]=0;
+    heap.push(start, 0);
+
+    while (!heap.isEmpty()){
+      const {node, dist: currentDist} = heap.pop()!;
+      if(currentDist > dist[node]) continue;
+
+       for(const [neighbour, weigth] of graph[node]){
+         const newDist = dist[node]+ weight;
+         if(newDist < dist[neighbour]){
+           dist[neighbour]= newDIst;
+           heap.push(neighbour, newDist);
+         }
+       }
+    }
+  returm dist;
 }
